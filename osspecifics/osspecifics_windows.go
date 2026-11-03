@@ -59,9 +59,9 @@ func CheckDeviceSeemsMounted(path string) (bool, error) {
 		return false, fmt.Errorf("bad match items length: want %v, have %v (%v)", want, have, match)
 	}
 
-	out, err := exec.Command("Get-CimInstance", "-Query", "\"SELECT Antecedent FROM Win32_LogicalDiskToPartition\"").Output()
+	out, err := exec.Command("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe", "-Command", "\"Get-CmiInstance -Query \\\"SELECT Antecedent FROM Win32_LogicalDiskToPartition\\\"\"").Output()
 	if err != nil {
-		return false, errors.Wrap(err, "exec wmic cmd")
+		return false, errors.Wrap(err, "exec powershell Get-CmiInstance")
 	}
 
 	return strings.Contains(string(out), fmt.Sprintf("Disk #%v", match[1])), nil
