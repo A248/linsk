@@ -59,7 +59,7 @@ func CheckDeviceSeemsMounted(path string) (bool, error) {
 		return false, fmt.Errorf("bad match items length: want %v, have %v (%v)", want, have, match)
 	}
 
-	out, err := exec.Command("wmic", "path", "Win32_LogicalDiskToPartition", "get", "Antecedent").Output()
+	out, err := exec.Command("Get-CimInstance", "-Query", "\"SELECT Antecedent FROM Win32_LogicalDiskToPartition\"").Output()
 	if err != nil {
 		return false, errors.Wrap(err, "exec wmic cmd")
 	}
