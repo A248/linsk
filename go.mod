@@ -1,4 +1,5 @@
 module github.com/AlexSSD7/linsk
+replace github.com/AlexSSD7/linsk => github.com/A248/linsk v1.0.0
 
 go 1.21
 
